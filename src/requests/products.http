@@ -1,0 +1,19 @@
+### GET Products
+GET http://127.0.0.1:5000/products
+content-type: application/json
+
+### GET Products by id
+GET http://127.0.0.1:5000/products?query=tal
+
+
+### Post a New Product
+POST http://127.0.0.1:5000/product
+Content-Type: application/x-www-form-urlencoded
+
+name = Buku Gambar &
+price = 30000 &
+description = Super a good product
+
+### DELETE PRODUCT
+DELETE http://127.0.0.1:5000/product/15
+

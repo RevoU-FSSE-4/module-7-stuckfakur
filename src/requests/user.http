@@ -1,0 +1,18 @@
+### POST REGISTER
+POST http://127.0.0.1:5000/register
+Content-Type: application/x-www-form-urlencoded
+
+name = akun2 &
+password = 12345 &
+email = akun2@gmail.com
+
+
+### POST LOGIN
+POST http://127.0.0.1:5000/login
+Content-Type: application/x-www-form-urlencoded
+
+email = akun2@gmail.com &
+password = 12345
+
+### GET LOGOUT
+GET http://127.0.0.1:5000/logout

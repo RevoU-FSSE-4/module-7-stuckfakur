@@ -1,0 +1,20 @@
+### GET Reviews
+GET http://127.0.0.1:5000/reviews
+content-type: application/json
+
+### GET Reviews by id
+GET http://127.0.0.1:5000/reviews?query=Good
+
+
+### POST a New Review
+POST http://127.0.0.1:5000/review
+Content-Type: application/x-www-form-urlencoded
+
+product_id = 2 &
+email = akun2@gmail.com &
+rating = 5 &
+review_content = Good
+
+### DELETE Review
+DELETE http://127.0.0.1:5000/review/2
+
