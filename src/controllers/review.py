@@ -47,29 +47,26 @@ def review_home():
 
 
 @review_routes.route('/review', methods=['POST'])
-@login_required
-def review_insert():
+# @jwt_required()
+def product_insert():
     Session = sessionmaker(connection)
     s = Session()
     s.begin()
     try:
-        # Create a new review instance
-        new_review = Review(
+        NewReview = Review(
             product_id=request.form['product_id'],
             email=request.form['email'],
             rating=request.form['rating'],
             review_content=request.form['review_content']
         )
 
-        # Add the new review to the session and commit
-        s.add(new_review)
+        s.add(NewReview)
         s.commit()
-        return {'message': 'Successfully inserted review data'}, 200
     except Exception as e:
-        # Rollback the session in case of an error
         s.rollback()
-        print(e)
-        return {"message": "Failed to insert review data"}, 500
+        return {"message": "Fail to Insert"}, 500
+
+    return {'message': 'Success insert product data'}, 200
 
 
 @review_routes.route('/review/<id>', methods=['DELETE'])

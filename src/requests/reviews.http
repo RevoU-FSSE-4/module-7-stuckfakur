@@ -18,3 +18,11 @@ review_content = Good
 ### DELETE Review
 DELETE http://127.0.0.1:5000/review/2
 
+### PUT Review
+PUT http://127.0.0.1:5000/review/1
+Content-Type: application/x-www-form-urlencoded
+
+product_id = 2 &
+email = akun2@gmail.com &
+rating = 5 &
+review_content = Very Good

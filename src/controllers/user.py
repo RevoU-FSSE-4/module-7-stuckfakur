@@ -1,8 +1,9 @@
 from connectors.mysql_connector import connection
 from flask import Blueprint, request
 from flask_jwt_extended import create_access_token
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required , current_user
 from models.user import User
+from sqlalchemy import select
 from sqlalchemy.orm import sessionmaker
 
 user_routes = Blueprint("user_routes", __name__)
@@ -96,3 +97,37 @@ def check_login_jwt():
 def user_logout():
     logout_user()
     return {"message": "Success logout"}
+
+
+# Get some data users
+@user_routes.route('/users', methods=['GET'])
+@login_required
+def get_users():
+    Session = sessionmaker(connection)
+    s = Session()
+
+    try:
+        user_query = select(User)
+
+        search_keyword = request.args.get('query')
+        if search_keyword != None:
+            user_query = user_query.where(User.name.like(f"%{search_keyword}%"))
+
+        result = s.execute(user_query)
+        users = []
+
+        for row in result.scalars():
+            (users.append({
+                'id': row.id,
+                'name': row.name,
+                'email': row.email
+            }))
+
+        return {
+            'users': users,
+            'message': "Hello, " + current_user.name
+        }, 200
+
+    except Exception as e:
+        print(e)
+        return {'message': 'Unexpected Error'}, 500

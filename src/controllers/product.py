@@ -4,6 +4,7 @@ from models.product import Product
 from sqlalchemy import select
 from sqlalchemy.orm import sessionmaker
 from flask_login import login_required, current_user
+from flasgger import swag_from
 
 product_routes = Blueprint("product_routes", __name__)
 

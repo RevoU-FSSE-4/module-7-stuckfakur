@@ -1,4 +1,5 @@
 from flask import Flask
+from flasgger import Swagger
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -19,6 +20,7 @@ from models.user import User
 
 
 app = Flask(__name__)
+swagger = Swagger(app)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 app.register_blueprint(product_routes)

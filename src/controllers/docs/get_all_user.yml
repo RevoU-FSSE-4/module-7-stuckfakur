@@ -1,0 +1,45 @@
+get:
+  tags:
+    - Users
+  summary: Retrieve a list of users
+  description: Get all users or search for users by name.
+  parameters:
+    - in: query
+      name: query
+      type: string
+      description: Search keyword to filter users by name
+  responses:
+    200:
+      description: A list of users
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "John Doe"
+                    email:
+                      type: string
+                      example: "john.doe@example.com"
+              message:
+                type: string
+                example: "Hello, John Doe"
+    500:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Unexpected Error"
