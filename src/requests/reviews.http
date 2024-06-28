@@ -12,8 +12,8 @@ Content-Type: application/x-www-form-urlencoded
 
 product_id = 2 &
 email = akun2@gmail.com &
-rating = 5 &
-review_content = Good
+rating = 3 &
+description = Good
 
 ### DELETE Review
 DELETE http://127.0.0.1:5000/review/2

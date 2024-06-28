@@ -21,7 +21,7 @@ def review_home():
 
         search_keyword = request.args.get('query')
         if search_keyword:
-            review_query = review_query.where(Review.review_content.like(f"%{search_keyword}%"))
+            review_query = review_query.where(Review.description.like(f"%{search_keyword}%"))
 
         result = s.execute(review_query)
         reviews = []
@@ -33,7 +33,7 @@ def review_home():
                 'product_name': product_name,  # this is show name from product_id
                 'email': review.email,
                 'rating': review.rating,
-                'review_content': review.review_content,
+                'description': review.description,
             })
 
         return {
@@ -57,7 +57,7 @@ def product_insert():
             product_id=request.form['product_id'],
             email=request.form['email'],
             rating=request.form['rating'],
-            review_content=request.form['review_content']
+            description=request.form['description']
         )
 
         s.add(NewReview)
@@ -66,7 +66,7 @@ def product_insert():
         s.rollback()
         return {"message": "Fail to Insert"}, 500
 
-    return {'message': 'Success insert product data'}, 200
+    return {'message': 'Success insert review data'}, 200
 
 
 @review_routes.route('/review/<id>', methods=['DELETE'])
@@ -97,7 +97,7 @@ def review_update(id):
         review.product_id = request.form['product_id']
         review.email = request.form['email']
         review.rating = request.form['rating']
-        review.review_content = request.form['review_content']
+        review.description = request.form['description']
 
         s.commit()
     except Exception as e:

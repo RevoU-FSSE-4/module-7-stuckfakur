@@ -11,7 +11,7 @@ class Review(Base):
     # product_id = mapped_column(Integer)
     email = mapped_column(String(30), nullable= False)
     rating = mapped_column(Integer)
-    review_content = mapped_column(Text)
+    description = mapped_column(Text)
     created_at = mapped_column(DateTime(timezone=True), server_default=func.now())
     
     def __repr__(self):
