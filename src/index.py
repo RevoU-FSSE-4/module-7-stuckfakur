@@ -18,10 +18,13 @@ from flask_login import LoginManager
 from flask_jwt_extended import JWTManager
 from models.user import User
 
+from datetime import timedelta
+
 
 app = Flask(__name__)
 swagger = Swagger(app)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 app.register_blueprint(product_routes)
 app.register_blueprint(review_routes)
